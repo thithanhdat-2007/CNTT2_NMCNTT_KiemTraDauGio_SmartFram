@@ -1,0 +1,18 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+PS D:\T> New-Item -ItemType Directory -Path "smartfarm-system/docs", "smartfarm-system/scripts", "smartfarm-system/data", "smartfarm-system/backup" -Force
+
+
+    Directory: D:\T\smartfarm-system
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        10/27/2026   2:30 PM                docs
+d-----        10/27/2026   2:30 PM                scripts
+d-----        10/27/2026   2:30 PM                data
+d-----        10/27/2026   2:30 PM                backup
+
+
+PS D:\T>
