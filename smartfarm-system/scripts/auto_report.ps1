@@ -1,18 +1,18 @@
-# AUDIT: Da tham dinh script, khong co lenh xoa hang loat.
+# AUDIT: Da kiem tra script, khong co lenh xoa du lieu hang loat.
 
-$logFile = "../data/log-he-thong.log"
-$reportFile = "../backup/bao-cao-su-co.txt"
+$logFile = '..\data\log-he-thong.log'
+$reportFile = '..\backup\bao-cao-su-co.txt'
+$pattern = '\[(ERROR|CRITICAL)\]'
 
-Write-Output "BAO CAO SU CO HE THONG SMARTFARM" > $reportFile
-Write-Output "NGAY GIO: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')" >> $reportFile
-Write-Output "" >> $reportFile
+$PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 
-Get-Content $logFile | Select-String -Pattern "CRITICAL", "ERROR" >> $reportFile
+Write-Output 'BAO CAO SU CO - SMARTFARM' > $reportFile
+Write-Output "Ngay gio: $(Get-Date -Format 'dd/MM/yyyy HH:mm:ss')" >> $reportFile
+Write-Output '========================================' >> $reportFile
 
-$soSuCo = (Get-Content $logFile | Select-String -Pattern "CRITICAL", "ERROR" | Measure-Object -Line).Lines
+Get-Content $logFile | Select-String -Pattern $pattern >> $reportFile
 
-Write-Output "" >> $reportFile
-Write-Output "TONG SO SU CO:" >> $reportFile
+$soSuCo = (Get-Content $logFile | Select-String -Pattern $pattern | Measure-Object).Count
+Write-Output '========================================' >> $reportFile
+Write-Output 'TONG SO SU CO:' >> $reportFile
 Write-Output $soSuCo >> $reportFile
-
-Write-Output "Da tao bao cao tai: $reportFile"
